@@ -11,9 +11,6 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.core.Ordered
 import org.springframework.core.annotation.Order
 import org.springframework.jdbc.core.JdbcTemplate
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -92,19 +89,5 @@ class AuthorizationServerConfig(
     @Bean
     fun providerSettings(): ProviderSettings {
         return ProviderSettings.builder().issuer("http://localhost:9000").build()
-    }
-
-    @Bean
-    fun embeddedDatabase(): EmbeddedDatabase? {
-        // @formatter:off
-        return EmbeddedDatabaseBuilder()
-                .generateUniqueName(true)
-                .setType(EmbeddedDatabaseType.H2)
-                .setScriptEncoding("UTF-8")
-                .addScript("org/springframework/security/oauth2/server/authorization/oauth2-authorization-schema.sql")
-                .addScript("org/springframework/security/oauth2/server/authorization/oauth2-authorization-consent-schema.sql")
-                .addScript("org/springframework/security/oauth2/server/authorization/client/oauth2-registered-client-schema.sql")
-                .build()
-        // @formatter:on
     }
 }
