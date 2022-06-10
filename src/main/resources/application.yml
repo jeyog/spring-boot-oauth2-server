@@ -1,2 +1,9 @@
 server:
   port: 9000
+
+spring:
+  datasource:
+    url: jdbc:mariadb://${MARIADB_HOST:localhost}:3306/oauth?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 10241207
+    driver-class-name: org.mariadb.jdbc.Driver
