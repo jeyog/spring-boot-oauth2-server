@@ -37,7 +37,7 @@ class JpaOAuth2AuthorizationConsentService(
 
     private fun toObject(authorizationConsent: AuthorizationConsent): OAuth2AuthorizationConsent {
         val registeredClientId = authorizationConsent.registeredClientId
-        this.registeredClientRepository.findByClientId(registeredClientId)
+        this.registeredClientRepository.findById(registeredClientId)
             ?: throw DataRetrievalFailureException(
                 "The RegisteredClient with id '${registeredClientId}' was not found in the RegisteredClientRepository."
             )
