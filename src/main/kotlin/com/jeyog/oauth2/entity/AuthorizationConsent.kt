@@ -18,8 +18,8 @@ class AuthorizationConsent(
         var authorities: String? = null
 ) {
     class AuthorizationConsentId(
-            private val registeredClientId: String,
-            private val principalName: String
+            private val registeredClientId: String = "",
+            private val principalName: String = ""
     ): Serializable {
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
