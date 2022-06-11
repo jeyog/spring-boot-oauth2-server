@@ -13,9 +13,9 @@ class Authorization(
         val principalName: String,
         val authorizationGrantType: String,
         @Column(length = 4000)
-        val attributes: String,
+        var attributes: String? = null,
         @Column(length = 500)
-        val state: String,
+        var state: String? = null,
 
         @Column(length = 4000)
         var authorizationCodeValue: String? = null,
