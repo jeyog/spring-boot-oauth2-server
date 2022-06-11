@@ -74,14 +74,14 @@ class JpaOAuth2AuthorizationService(
     }
 
     private fun toObject(entity: Authorization): OAuth2Authorization {
-        val registeredClient = this.registeredClientRepository.findById(entity.id)
+        val registeredClient = this.registeredClientRepository.findById(entity.registeredClientId)
             ?: throw DataRetrievalFailureException("The RegisteredClient with id '${entity.registeredClientId}' was not found in the RegisteredClientRepository.")
 
         val builder = OAuth2Authorization.withRegisteredClient(registeredClient)
             .id(entity.id)
             .principalName(entity.principalName)
             .authorizationGrantType(resolveAuthorizationGrantType(entity.authorizationGrantType))
-            .attributes { attributes -> attributes.putAll(parseMap(entity.attributes)) }
+            .attributes { attributes -> attributes.putAll(parseMap(entity.attributes!!)) }
 
         if (entity.authorizationCodeValue != null) {
             val authorizationCode = OAuth2AuthorizationCode(
@@ -140,7 +140,7 @@ class JpaOAuth2AuthorizationService(
             principalName = authorization.principalName,
             authorizationGrantType = authorization.authorizationGrantType.value,
             attributes = writeMap(authorization.attributes),
-            state = authorization.getAttribute(OAuth2ParameterNames.STATE)!!
+            state = authorization.getAttribute(OAuth2ParameterNames.STATE)
         )
 
         val authorizationCode = authorization.getToken(OAuth2AuthorizationCode::class.java)
