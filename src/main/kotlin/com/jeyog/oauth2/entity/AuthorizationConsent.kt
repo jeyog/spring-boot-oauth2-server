@@ -15,7 +15,7 @@ class AuthorizationConsent(
         @Id
         val principalName: String,
         @Column(length = 1000)
-        val authorities: String
+        var authorities: String? = null
 ) {
     class AuthorizationConsentId(
             private val registeredClientId: String,

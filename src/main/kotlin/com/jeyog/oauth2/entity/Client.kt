@@ -10,9 +10,9 @@ class Client(
         @Id
         val id: String,
         val clientId: String,
-        val clientIdIssuedAt: Instant,
-        val clientSecret: String,
-        val clientSecretExpiresAt: Instant,
+        val clientIdIssuedAt: Instant?,
+        val clientSecret: String?,
+        val clientSecretExpiresAt: Instant?,
         val clientName: String,
         @Column(length = 1000)
         val clientAuthenticationMethods: String,

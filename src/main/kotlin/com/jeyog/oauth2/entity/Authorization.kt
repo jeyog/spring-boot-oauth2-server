@@ -18,35 +18,35 @@ class Authorization(
         val state: String,
 
         @Column(length = 4000)
-        val authorizationCodeValue: String,
-        val authorizationCodeIssuedAt: Instant,
-        val authorizationCodeExpiresAt: Instant,
-        val authorizationCodeMetadata: String,
+        var authorizationCodeValue: String? = null,
+        var authorizationCodeIssuedAt: Instant? = null,
+        var authorizationCodeExpiresAt: Instant? = null,
+        var authorizationCodeMetadata: String? = null,
 
         @Column(length = 4000)
-        val accessTokenValue: String,
-        val accessIssuedAt: Instant,
-        val accessTokenExpiresAt: Instant,
+        var accessTokenValue: String? = null,
+        var accessTokenIssuedAt: Instant? = null,
+        var accessTokenExpiresAt: Instant? = null,
         @Column(length = 2000)
-        val accessTokenMetadata: String,
-        val accessTokenType: String,
+        var accessTokenMetadata: String? = null,
+        var accessTokenType: String? = null,
         @Column(length = 1000)
-        val accessTokenScopes: String,
+        var accessTokenScopes: String? = null,
 
         @Column(length = 4000)
-        val refreshTokenValue: String,
-        val refreshTokenIssuedAt: Instant,
-        val refreshTokenExpiresAt: Instant,
+        var refreshTokenValue: String? = null,
+        var refreshTokenIssuedAt: Instant? = null,
+        var refreshTokenExpiresAt: Instant? = null,
         @Column(length = 2000)
-        val refreshTokenMetadata: String,
+        var refreshTokenMetadata: String? = null,
 
         @Column(length = 4000)
-        val oidcIdTokenValue: String,
-        val oidcIdTokenIssuedAt: Instant,
-        val oidcIdTokenExpiresAt: Instant,
+        var oidcIdTokenValue: String? = null,
+        var oidcIdTokenIssuedAt: Instant? = null,
+        var oidcIdTokenExpiresAt: Instant? = null,
         @Column(length = 2000)
-        val oidcIdTokenMetadata: String,
+        var oidcIdTokenMetadata: String? = null,
         @Column(length = 2000)
-        val oidcIdTokenClaims: String
+        var oidcIdTokenClaims: String? = null
 ) {
 }
