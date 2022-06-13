@@ -1,6 +1,9 @@
 package com.jeyog.oauth2.config
 
+import com.jeyog.oauth2.entity.User
+import com.jeyog.oauth2.entity.UserRole
 import com.jeyog.oauth2.repository.JpaRegisteredClientRepository
+import com.jeyog.oauth2.repository.UserRepository
 import org.springframework.boot.CommandLineRunner
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -13,10 +16,10 @@ import org.springframework.security.oauth2.server.authorization.config.ClientSet
 
 @Configuration
 class LoadDatabase(
-        private val passwordEncoder: PasswordEncoder
+    private val passwordEncoder: PasswordEncoder
 ) {
     @Bean
-    fun initDatabase(repository: JpaRegisteredClientRepository) = CommandLineRunner {
+    fun initClientDatabase(repository: JpaRegisteredClientRepository) = CommandLineRunner {
         val registeredClient = RegisteredClient.withId("78dc002d-a906-4b9b-ba82-9abf31f14dbf")
                 .clientId("G7s6BIEKoXXabzCkxqpE")
                 .clientSecret(passwordEncoder.encode("secret"))
@@ -31,5 +34,16 @@ class LoadDatabase(
                 .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
                 .build()
         repository.save(registeredClient)
+    }
+
+    @Bean
+    fun initUserDatabase(repository: UserRepository) = CommandLineRunner {
+        val user = User(
+            id = 1,
+            username = "test",
+            password = passwordEncoder.encode("1234qwer@"),
+            roles = arrayListOf(UserRole.ROLE_USER)
+        )
+        repository.save(user)
     }
 }
